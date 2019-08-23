@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration scan="true" scanPeriod="10" debug="false">
+    <contextName>work-process</contextName>
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[work-process] %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出error到文件-->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--是error级别记入-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不是error级别不记入-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/work-process/error/%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--针对不同环境下的其他日志信息的处理-->
+    <springProfile name="prod">
+        <root level="error">
+            <appender-ref ref="error"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="error">
+            <appender-ref ref="error"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+</configuration>

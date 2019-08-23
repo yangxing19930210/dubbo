@@ -1,0 +1,4 @@
+flowUrl: http://172.16.6.16:8088/koa/prize/sendApproveByDocKind
+url: http://172.16.6.16:8088/koa/
+#flowUrl: http://testzookpr.sekorm.com:7003/koa/prize/sendApproveByDocKind
+#url: http://testzookpr.sekorm.com:7003/koa/

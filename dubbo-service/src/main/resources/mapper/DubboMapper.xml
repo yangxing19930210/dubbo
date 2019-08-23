@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sekorm.dubbo.service.dao.DubboDao">
+
+    <resultMap id="dubboVO" type="com.sekorm.dubbo.service.vo.DubboVO">
+        <result column="CHINESE_NAME" jdbcType="VARCHAR" property="employeeChineseName"/>
+        <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber"/>
+        <result column="DEPT" jdbcType="VARCHAR" property="employeeDept"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="employeeEnglishName"/>
+    </resultMap>
+
+    <select id="findEmployeeByName" resultMap="dubboVO" parameterType="java.lang.String">
+        select a.EMPLOYEE_NUMBER,
+            a.CHINESE_NAME,
+            a.DEPT,
+            a.USER_NAME
+            from web_employees_v a
+            where a.STATUS = '1'
+            and  lower(a.USER_NAME)=lower(#{name})
+    </select>
+
+</mapper>

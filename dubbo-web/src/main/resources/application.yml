@@ -1,0 +1,41 @@
+#spring配置
+spring:
+  profiles:
+    active: @project.env@
+  resources:
+    static-locations: classpath:/static
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+    suffix: .html
+    template-loader-path: classpath:/templates/
+    charset: UTF-8
+    request-context-attribute: request
+  mvc:
+    static-path-pattern: /*
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+      enabled: true
+#关闭默认错误页面
+server:
+  error:
+    whitelabel:
+      enabled=false:
+#日志
+logging:
+  config: classpath:logback-spring.xml
