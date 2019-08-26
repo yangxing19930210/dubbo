@@ -92,16 +92,10 @@
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>application.yml</include>
-					<include>application-${project.env}.yml</include>
+					<include>**/*.yml</include>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
 				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>false</filtering>
-				<excludes>
-					<exclude>**/*.yml</exclude>
-				</excludes>
 			</resource>
 		</resources>
 	</build>
