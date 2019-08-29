@@ -20,7 +20,7 @@ public class DubboController {
     @GetMapping("/dubbo/{name}")
     public Integer findCountByName(@PathVariable(value = "name") String userName) {
         UserBean userBean = new UserBean();
-        userBean.setUserEnglishName("noah_yang");
+        userBean.setUserEnglishName(userName);
         return userDubbo.findCountByName(userBean);
     }
 

@@ -12,13 +12,13 @@
     <dubbo:application name="UserDubbo"/>
     <!-- 使用multicast广播注册中心暴露服务地址 -->
     <dubbo:registry group="dev" address="${dubbo.address}"/>
-
-
+    <!--元数据中心-->
+    <dubbo:metadata-report group="dev" address="${dubbo.address}"/>
     <!-- 用dubbo 协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="${dubbo.port}" payload="8388608" accepts="20"/>
     <!-- <dubbo:monitor protocol="registry"/>  -->
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.sekorm.idubbo.declare.UserDubbo" ref="userDubboImpl" timeout="${dubbo.timeout}"/>
+    <dubbo:service group="dev" interface="com.sekorm.idubbo.declare.UserDubbo" ref="userDubboImpl" timeout="${dubbo.timeout}" version="190829"/>
     <!-- bean-->
     <bean id="userDubboImpl" class="com.sekorm.idubbo.dubbo.UserDubboImpl"/>
 
