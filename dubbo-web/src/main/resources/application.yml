@@ -36,7 +36,7 @@ server:
   error:
     whitelabel:
       enabled: false
-  port: 8091
+  port: 8092
 #日志
 logging:
   config: classpath:logback-spring.xml

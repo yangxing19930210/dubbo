@@ -4,14 +4,15 @@
        xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
     <!-- 配置文件 -->
     <context:property-placeholder location="classpath:config.properties"/>
-
+    <!--指标监控-->
+    <dubbo:metrics port="20880" protocol="dubbo"/>
+    <dubbo:provider filter="metrics" />
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="UserDubbo"/>
-    <!-- 使用multicast广播注册中心暴露服务地址 -->
-    <dubbo:registry group="dev" address="${dubbo.address}"/>
+    <!-- 使用zookeeper广播注册中心暴露服务地址 -->
+    <dubbo:registry group="dev" address="${dubbo.address}" simplified="true"/>
     <!--元数据中心-->
     <dubbo:metadata-report group="dev" address="${dubbo.address}"/>
     <!-- 用dubbo 协议在20880端口暴露服务 -->
@@ -21,6 +22,4 @@
     <dubbo:service group="dev" interface="com.sekorm.idubbo.declare.UserDubbo" ref="userDubboImpl" timeout="${dubbo.timeout}" version="190829"/>
     <!-- bean-->
     <bean id="userDubboImpl" class="com.sekorm.idubbo.dubbo.UserDubboImpl"/>
-
-
 </beans>
